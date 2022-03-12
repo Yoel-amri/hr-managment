@@ -1,0 +1,101 @@
+###
+POST http://localhost:9000/api/system_admin/company/updateCompany
+Content-Type: application/json
+
+{
+    "email":"emplwoyee@gmail.com",
+    "role":"EMPLOYEE"
+}
+
+###
+
+GET http://localhost:9000/api/system_admin/employee/findUsers?role=SYSTEM_ADMIN
+
+###
+GET http://localhost:9000/api/system_admin/employee/getEmployeeInfo?user_id=f5da3325-18c9-41b9-9725-dcbe6b770ba4
+###
+GET http://localhost:9000/api/system_admin/company/getAllCompanies
+
+### SIGNUP
+POST http://localhost:9000/api/system_admin/xys
+Content-Type: application/json
+
+{
+    "company_id": "dewdqwef",
+    "company_name": "13237",
+    "address": "addre23ss hahaha",
+    "postal_code": "12323343",
+    "phone_number": "212663493190",
+    "email": "1337@1j3233237.ma",
+    "website": "23.ma",
+    "date_creation": "12-13-1999"
+}
+###
+POST http://localhost:9000/api/users/login
+Content-Type: application/json
+
+{
+    "email": "yahooo@gmail.com",
+    "password": "password"
+}
+
+####
+POST http://localhost:9000/api/system_admin/employee/inviteEmployee
+Content-Type: application/json
+
+{
+    "email": "yjassine@gmail.com",
+    "role": "ADMIN",
+    "company_id": "99817638-c0f1-4de2-ac7b-a2c0b5606407"
+}
+
+###
+
+POST http://localhost:9000/api/system_admin/inviteSysAdmin
+Content-Type: application/json
+
+{
+    "email": "yahoojo@gmail.com",
+    "role": "SYSTEM_ADMIN"
+}
+
+###
+POST http://localhost:9000/api/users/signUp/eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Inlhc3NpbmVAZ21haWwuY29tIiwicm9sZSI6IkFETUlOIiwiY29tcGFueV9pZCI6Ijk5ODE3NjM4LWMwZjEtNGRlMi1hYzdiLWEyYzBiNTYwNjQwNyIsInVzZXJfaWQiOiI3OTc4NmY4My0wYTBiLTQ1M2MtYmUwZS1mZjVhYTk4YzBjMmIiLCJpYXQiOjE2NDY4NDM2MTl9.UCq4jMSObjSiGp-l44OHtZ8NftPNQMLFeqE6Y1BsJXA
+Content-Type: application/json
+
+{
+    "firstname": "employee",
+    "lastname": "employess",
+    "password": "password",
+    "passwordConfirmation": "password",
+    "email": "employee@employee.com"
+}
+
+###
+POST http://localhost:9000/api/system_admin/company/createCompany
+Content-Type: application/json
+
+{
+
+}
+
+
+####
+GET http://localhost:9000/api/matching/profiles?age=18&age=40&sortBy=tags&tags=sex&tags=asss
+Content-Type: application/json
+
+
+####
+POST http://localhost:9000/api/system_admin/company/UpdateProfileImage
+Content-Type: multipart/form-data; boundary=----WebKitFormBoundary7MA4YWxkTrZu0gW
+
+------WebKitFormBoundary7MA4YWxkTrZu0gW
+Content-Disposition: form-data; name="profile_img"; filename="ball.png"
+Content-Type: image/png
+
+< ./ball.png
+------WebKitFormBoundary7MA4YWxkTrZu0gW
+Content-Disposition: form-data; name="company_id"
+
+99817638-c0f1-4de2-ac7b-a2c0b5606407
+------WebKitFormBoundary7MA4YWxkTrZu0gW--

@@ -1,0 +1,31 @@
+{
+  "name": "Employee_managment_system",
+  "version": "1.0.0",
+  "description": "Employee_managment_system",
+  "main": "index.js",
+  "scripts": {
+    "start": "nodemon index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": ""
+  },
+  "author": "Elamri Youness",
+  "license": "ISC",
+  "dependencies": {
+    "bcrypt": "^5.0.1",
+    "cookie-parser": "^1.4.5",
+    "cors": "^2.8.5",
+    "dayjs": "^1.10.7",
+    "dotenv": "^10.0.0",
+    "express": "^4.17.1",
+    "jsonwebtoken": "^8.5.1",
+    "multer": "^1.4.3",
+    "mysql2": "^2.2.5",
+    "nodemailer": "^6.6.3",
+    "nodemon": "^2.0.7",
+    "path": "^0.12.7",
+    "pg": "^8.7.3",
+    "uuid": "^8.3.2"
+  }
+}
