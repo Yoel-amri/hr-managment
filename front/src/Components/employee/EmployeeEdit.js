@@ -22,7 +22,7 @@ export default function EmployeeEdit({ user_id, role }) {
     user_id: "",
   });
   const [profileImage, setProfileImage] = useState("");
-  const [profileImageSrc, setProfileImageSrc] = useState("");
+
   const [birthday, setBirthday] = useState();
 
   const [severity, setSeverity] = useState("success");
@@ -42,7 +42,6 @@ export default function EmployeeEdit({ user_id, role }) {
     let apiRole = "system_admin"
     if (role === "ADMIN") apiRole = "admins"
     if (role === 'EMPLOYEE') apiRole = 'employee'
-    console.log(role);
     axios
       .get(
         `${process.env.REACT_APP_BACKEND_URL}/api/${apiRole}/employee/getEmployeeInfo?user_id=${user_id}`,
@@ -53,7 +52,7 @@ export default function EmployeeEdit({ user_id, role }) {
         setUserInfo(res.data[0]);
         setBirthday(moment(res?.data[0]?.birthday))
       });
-  }, []);
+  }, [role, user_id]);
 
   const onFileChange = (event) => {
     setProfileImage(event.target.files[0]);

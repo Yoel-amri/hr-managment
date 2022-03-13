@@ -2,7 +2,7 @@
 import { useLocation, useNavigate} from "react-router-dom";
 import { Alert, Button, Snackbar, TextField } from "@mui/material";
 import axios from "axios";
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 
 import DatePickerSimple from "../../Components/datepicker/DatePicker";
 

@@ -33,7 +33,6 @@ export default function SearchEmployee({ me }) {
   const [open, setOpen] = useState(false);
   const [selectedUser, setSelectedUser] = useState('');
 
-  const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
 
   const selectCompany = (e) => {
@@ -94,7 +93,7 @@ export default function SearchEmployee({ me }) {
           );
         });
     }
-  }, []);
+  }, [me]);
 
   const searchUser = (user_id) => {
       setSelectedUser(user_id);

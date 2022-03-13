@@ -7,7 +7,7 @@ import TableCell from "@mui/material/TableCell";
 import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
-import { Alert, Autocomplete, Snackbar, TextField } from "@mui/material";
+import { Alert, Snackbar } from "@mui/material";
 
 export default function InvitationsHistory({ me, updatedInvites }) {
   const [showSysAdmin, setShowSysAdmin] = useState(false);

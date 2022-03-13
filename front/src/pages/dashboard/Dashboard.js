@@ -1,17 +1,14 @@
 import * as React from 'react';
-import PropTypes from 'prop-types';
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
 import CssBaseline from '@mui/material/CssBaseline';
 import Divider from '@mui/material/Divider';
 import Drawer from '@mui/material/Drawer';
 import IconButton from '@mui/material/IconButton';
-import InboxIcon from '@mui/icons-material/MoveToInbox';
 import List from '@mui/material/List';
 import ListItem from '@mui/material/ListItem';
 import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
-import AddBusinessIcon from '@mui/icons-material/AddBusiness';
 import MenuIcon from '@mui/icons-material/Menu';
 import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
@@ -19,10 +16,7 @@ import {Navigate} from 'react-router-dom'
 import Search from '../../Components/Search/Search';
 import RegisterCompnay from '../../Components/company/RegisterCompnay';
 import InviteEmployee from '../../Components/employee/InviteEmployee';
-import { Switch } from '@mui/material';
-import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import axios from 'axios';
-import CompanyEdit from '../../Components/company/CompanyEdit';
 import EditOwnCompany from '../../Components/company/EditOwnCompany';
 import ShowCompany from '../../Components/company/ShowCompany';
 import EmployeeEdit from '../../Components/employee/EmployeeEdit';

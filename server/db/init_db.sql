@@ -31,7 +31,7 @@ CREATE TABLE company (
 	email VARCHAR ( 255 ) UNIQUE NOT NULL,
 	created_on 	TIMESTAMP  DEFAULT Now(),
 	created_by 	VARCHAR(50) REFERENCES users,
-	profile_image VARCHAR (50),
+	profile_image VARCHAR (50)
 );
 
 CREATE TABLE employee_company (

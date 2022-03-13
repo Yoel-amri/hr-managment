@@ -5,7 +5,7 @@ import DatePickerSimple from '../datepicker/DatePicker';
 import moment from 'moment';
 
 
-export default function RegisterCompnay({}) {
+export default function RegisterCompnay() {
     const [severity, setSeverity] = useState('success');
     const [open, setOpen] = React.useState(false);
     const [alertMessage, setAlertMessage] = useState('Company updated succesfully !');
@@ -18,7 +18,6 @@ export default function RegisterCompnay({}) {
     const [postalCode, setPostalCode] = useState('');
     const [website, setWebSite] = useState('');
     const [dateCreation, setDateCreation] = useState(moment(''));
-    const [companyId, setCompanyId] = useState('');
 
     const handleClose = (event, reason) => {
         if (reason === 'clickaway') {
