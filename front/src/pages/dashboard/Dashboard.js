@@ -11,7 +11,7 @@ import List from '@mui/material/List';
 import ListItem from '@mui/material/ListItem';
 import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
-import MailIcon from '@mui/icons-material/Mail';
+import AddBusinessIcon from '@mui/icons-material/AddBusiness';
 import MenuIcon from '@mui/icons-material/Menu';
 import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
@@ -19,6 +19,21 @@ import {Navigate} from 'react-router-dom'
 import Search from '../../Components/Search/Search';
 import RegisterCompnay from '../../Components/company/RegisterCompnay';
 import InviteEmployee from '../../Components/employee/InviteEmployee';
+import { Switch } from '@mui/material';
+import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+import axios from 'axios';
+import CompanyEdit from '../../Components/company/CompanyEdit';
+import EditOwnCompany from '../../Components/company/EditOwnCompany';
+import ShowCompany from '../../Components/company/ShowCompany';
+import EmployeeEdit from '../../Components/employee/EmployeeEdit';
+import SearchRoundedIcon from '@mui/icons-material/SearchRounded';
+import DomainAddRoundedIcon from '@mui/icons-material/DomainAddRounded';
+import ContactMailRoundedIcon from '@mui/icons-material/ContactMailRounded';
+import LogoutRoundedIcon from '@mui/icons-material/LogoutRounded';
+import EditRoundedIcon from '@mui/icons-material/EditRounded';
+import CorporateFareRoundedIcon from '@mui/icons-material/CorporateFareRounded';
+import AccountCircleRoundedIcon from '@mui/icons-material/AccountCircleRounded';
+
 
 const drawerWidth = 240;
 
@@ -27,17 +42,24 @@ function ResponsiveDrawer(props) {
   const [mobileOpen, setMobileOpen] = React.useState(false);
   const [section, setSection] = React.useState('search')
 
-  const me = {
-    user_id: localStorage.getItem('user_id'),
-    email: localStorage.getItem('email'),
-    role: localStorage.getItem('role')
-  }
+  const me = props.user;
+  console.log(me);
   const handleDrawerToggle = () => {
     setMobileOpen(!mobileOpen);
   };
 
   const logOut = () => {
-
+    axios.post(`${process.env.REACT_APP_BACKEND_URL}/api/users/logout`, {}, {withCredentials:true})
+    .then((res) => {
+      localStorage.setItem('user_id','')
+      localStorage.setItem('email','')
+      localStorage.setItem('role','')
+      props.setUser({
+        user_id: '',
+        email: '',
+        role: ''
+      })
+    })
   }
 
   const drawer = (
@@ -49,7 +71,7 @@ function ResponsiveDrawer(props) {
             (me.role === 'SYSTEM_ADMIN' || me.role === 'ADMIN') && 
             <ListItem onClick={()=> setSection('search')} button key="Search">
               <ListItemIcon>
-                <InboxIcon />
+                 <SearchRoundedIcon />
               </ListItemIcon>
               <ListItemText primary={"Search"} />
             </ListItem>
@@ -57,7 +79,7 @@ function ResponsiveDrawer(props) {
           { me.role === 'SYSTEM_ADMIN' &&
             <ListItem onClick={()=> setSection('register_company')} button key="Register Company">
               <ListItemIcon>
-                <InboxIcon />
+                <DomainAddRoundedIcon />
               </ListItemIcon>
               <ListItemText primary={"Register company"} />
             </ListItem>
@@ -65,15 +87,39 @@ function ResponsiveDrawer(props) {
           { (me.role === 'SYSTEM_ADMIN' || me.role === 'ADMIN') &&
             <ListItem onClick={()=> setSection('invite_employee')} button key="Invite employee">
               <ListItemIcon>
-                <InboxIcon /> 
+                <ContactMailRoundedIcon /> 
               </ListItemIcon>
               <ListItemText primary={"Invite employee"} />
+            </ListItem>
+          }
+          { me.role === 'ADMIN' &&
+            <ListItem onClick={()=> setSection('edit_company')} button key="edit company">
+              <ListItemIcon>
+                <EditRoundedIcon />
+              </ListItemIcon>
+              <ListItemText primary={"Edit your company"} />
+            </ListItem>
+          }
+          {me.role === 'EMPLOYEE' &&
+            <ListItem onClick={() => setSection('company_info')} button key="company info">
+              <ListItemIcon>
+                <CorporateFareRoundedIcon /> 
+              </ListItemIcon>
+              <ListItemText primary={"Company info"} />
+            </ListItem>
+          }
+          {me.role === 'EMPLOYEE' &&
+            <ListItem onClick={() => setSection('update_profile')} button key="update info">
+              <ListItemIcon>
+                <AccountCircleRoundedIcon />
+              </ListItemIcon>
+              <ListItemText primary={"Update info"} />
             </ListItem>
           }
           {
             <ListItem onClick={logOut} button key="Log out">
               <ListItemIcon>
-                <InboxIcon /> 
+                <LogoutRoundedIcon /> 
               </ListItemIcon>
               <ListItemText primary={"Log out"} />
             </ListItem>
@@ -83,7 +129,7 @@ function ResponsiveDrawer(props) {
   );
 
   const container = window !== undefined ? () => window().document.body : undefined;
-  if (!localStorage.getItem('user_id'))
+  if (!props.user.user_id)
     return <Navigate to='/login'/>
 
   return (
@@ -151,10 +197,13 @@ function ResponsiveDrawer(props) {
         {(me.role === 'SYSTEM_ADMIN' || me.role === 'ADMIN') && section === 'search' && <Search me={me} />}
         {(me.role === 'SYSTEM_ADMIN') && section === 'register_company' && <RegisterCompnay me={me} />}
         {(me.role === 'SYSTEM_ADMIN' || me.role === 'ADMIN') && section === 'invite_employee' && <InviteEmployee me={me}/> }
+        {(me.role === 'ADMIN') && section === 'edit_company' && <EditOwnCompany /> }
+        {me.role === 'EMPLOYEE' && section === 'company_info' && <ShowCompany me={me} />}
+        {me.role === 'EMPLOYEE' && section === 'update_profile' && <EmployeeEdit role={me.role} user_id={me.user_id}/>}
       </Box>
     </Box>
   );
 }
-export default function Dashboard() {
-  return <ResponsiveDrawer />;
+export default function Dashboard({user, setUser}) {
+  return <ResponsiveDrawer user={user} setUser={setUser} />
 }

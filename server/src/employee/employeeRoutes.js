@@ -6,10 +6,10 @@ const router = express.Router();
 //Users Routes
 const employeeControllers = require('./employeeControllers');
 
-router.post('/updateInfo', authenticateUser,employeeControllers.updateInfo);
-router.post('/updateProfileImage', authenticateUser ,upload.single('profile_image') ,employeeControllers.updateProfileImage);
-router.get('/getMyInfo', authenticateUser, employeeControllers.getMyInfo);
-router.get('/companyInfo', authenticateUser, employeeControllers.getCompany);
+router.post('/employee/updateProfile', authenticateUser,employeeControllers.updateInfo);
+router.post('/employee/updateProfileImage', authenticateUser ,upload.single('profile_img') ,employeeControllers.updateProfileImage);
+router.get('/employee/getEmployeeInfo', authenticateUser, employeeControllers.getMyInfo);
+router.get('/company/getOwnCompany', authenticateUser, employeeControllers.getCompany);
 
 
 module.exports = router;

@@ -21,17 +21,13 @@ async function signUpEmployee(req, res, next) {
         ...req.body,
     }
 
-    
-    /// Checking client data
     if (!req.body.firstname || !req.body.lastname || !req.body.password 
         || !req.body.passwordConfirmation) {
         return res.status(400).send('INVALID REQUEST');
     }
 
-
-    /// Adding user record to database
     if (userData.password !== userData.passwordConfirmation)
-        res.status(400).send('Passwords do not match !');
+        res.status(500).send('Passwords do not match !');
     
     try {
         let invitedUser = await jwt.verify(token, process.env.APP_SECRET);
@@ -50,6 +46,7 @@ async function signUpEmployee(req, res, next) {
                 address: userData.address,
                 postal_code: userData.postal_code,
                 remarks: userData.remarks,
+                birthday: userData.birthday,
             },
             where: {
                 email: userData.email,
@@ -142,32 +139,14 @@ async function login(req, res, next) {
     }).send(httpOnlyCookie);
 }
 
-async function inviteEmployee(req, res, next) {
-    const userData = {...req.body, user_id: uuidv4()};
-    try {
-        await users.createOne({
-            data: {
-                user_id: userData.user_id,
-                email: userData.email,
-                role: userData.role,
-                invitation: 'WAITING'
-            }
-        })
-        await employee_company.createOne({
-            data: {
-                company_id: userData.company_id,
-                user_id: userData.user_id
-            }
-        })
-        const token = jwt.sign(userData, process.env.APP_SECRET);
-        await sendMail(userData.email, token, `${process.env.APP_HOSTNAME}/users/signUp/${token}`);
-    } catch (e) {
-        next(e);
-    }
+
+async function logout(req, res, next) {
+    res.clearCookie('accessToken');
+    res.status(200).send('Cookie cleared')
 }
 
 module.exports = {
-    inviteEmployee,
+    logout,
     login,
     signUpSysAdmin,
     signUpEmployee

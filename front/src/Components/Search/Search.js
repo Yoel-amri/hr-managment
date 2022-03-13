@@ -7,9 +7,9 @@ export default function Search({ me }) {
     <div
       style={{
         height: "100%",
-        height: "100%",
         display: "flex",
         flexDirection: "column",
+        justifyContent: 'flex'
       }}
     >
       {me.role === "SYSTEM_ADMIN" && <SearchCompany />}

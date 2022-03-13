@@ -9,7 +9,7 @@ Content-Type: application/json
 
 ###
 
-GET http://localhost:9000/api/system_admin/employee/findUsers?role=SYSTEM_ADMIN
+GET http://localhost:9000/api/admins/employee/findUsers?role=ADMIN
 
 ###
 GET http://localhost:9000/api/system_admin/employee/getEmployeeInfo?user_id=f5da3325-18c9-41b9-9725-dcbe6b770ba4
@@ -38,13 +38,15 @@ Content-Type: application/json
     "email": "yahooo@gmail.com",
     "password": "password"
 }
+###
+POST http://localhost:9000/api/users/logout
 
 ####
 POST http://localhost:9000/api/system_admin/employee/inviteEmployee
 Content-Type: application/json
 
 {
-    "email": "yjassine@gmail.com",
+    "email": "yjaiohissine@gmail.com",
     "role": "ADMIN",
     "company_id": "99817638-c0f1-4de2-ac7b-a2c0b5606407"
 }

@@ -14,7 +14,7 @@ import {  Navigate } from "react-router-dom";
 
 const theme = createTheme();
 
-export default function SignIn() {
+export default function SignIn({user, setUser}) {
   const [error, setError] = React.useState('');
 
   const handleSubmit = async (event) => {
@@ -31,11 +31,16 @@ export default function SignIn() {
       localStorage.setItem('user_id', res.data.user_id);
       localStorage.setItem('role', res.data.role);
       localStorage.setItem('email', res.data.email);
+      setUser({
+        user_id: res.data.user_id,
+        role: res.data.role,
+        email: res.data.email
+      })
     })
     .catch(e => setError('Password or email is incorrect'));
   };
 
-  if (localStorage.getItem('user_id')){
+  if (user.user_id){
     return  <Navigate to='/dashboard' />
   }
 

@@ -33,7 +33,7 @@ async function updateProfileImage(req, res, next) {
                 user_id: req.user.user_id
             }
         })
-        return res.status(200).send(req.imageName);
+        return res.status(200).send({profile_image: req.imageName});
     } catch (e) {
         return next()
     }
@@ -49,13 +49,13 @@ async function getMyInfo(req, res, next) {
         delete userData[0].password
         return res.status(200).send(userData);
     } catch (e) {
-        return  next()
+        return  next(e)
     }
 }
 
 async function getCompany(req, res, next) {
     try {
-        const employeCompanyId = await employee_company.findMany({
+        let employeCompanyId = await employee_company.findMany({
             where: {
                 user_id: req.user.user_id
             }

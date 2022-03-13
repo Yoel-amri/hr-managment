@@ -9,13 +9,7 @@ import Dashboard from './pages/dashboard/Dashboard';
 
 ReactDOM.render(
   <React.StrictMode>
-    <Router >
-      <Routes>
-        <Route path='/' element={<SignIn />}/>
-        <Route path='/login' element={<SignIn />} />
-        <Route path='/dashboard' element={<Dashboard />} />
-      </Routes>
-    </Router>
+    <App />
   </React.StrictMode>,
   document.getElementById('root')
 );

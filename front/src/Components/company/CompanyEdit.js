@@ -4,7 +4,6 @@ import React, { useState } from 'react'
 import DatePickerSimple from '../datepicker/DatePicker';
 import moment from 'moment';
 
-
 export default function CompanyEdit({company, setCompanyUpdated}) {
     const [severity, setSeverity] = useState('success');
     const [open, setOpen] = React.useState(false);

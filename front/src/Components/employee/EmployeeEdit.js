@@ -39,8 +39,10 @@ export default function EmployeeEdit({ user_id, role }) {
   };
 
   useEffect(() => {
-    let apiRole = "system_admin";
-    if (role === "ADMIN") apiRole = "admins";
+    let apiRole = "system_admin"
+    if (role === "ADMIN") apiRole = "admins"
+    if (role === 'EMPLOYEE') apiRole = 'employee'
+    console.log(role);
     axios
       .get(
         `${process.env.REACT_APP_BACKEND_URL}/api/${apiRole}/employee/getEmployeeInfo?user_id=${user_id}`,
@@ -49,7 +51,7 @@ export default function EmployeeEdit({ user_id, role }) {
       .then((res) => {
         console.log(res.data);
         setUserInfo(res.data[0]);
-        setBirthday(moment(res.data[0].birthday))
+        setBirthday(moment(res?.data[0]?.birthday))
       });
   }, []);
 
@@ -58,8 +60,12 @@ export default function EmployeeEdit({ user_id, role }) {
   };
 
   const updateUser = () => {
-      console.log(birthday);
-    axios.post(`${process.env.REACT_APP_BACKEND_URL}/api/system_admin/employee/updateProfile`, {
+      // console.log(birthday);
+    let apiRole = "system_admin";
+    if (role === "ADMIN") apiRole = "admins";
+    if (role === 'EMPLOYEE') apiRole = 'employee'
+
+    axios.post(`${process.env.REACT_APP_BACKEND_URL}/api/${apiRole}/employee/updateProfile`, {
         user_id: user_id,
         ...userInfo,
         birthday: birthday.isValid() ? (birthday.toDate().getMonth()+1+'-'+birthday.toDate().getDate()+'-'+birthday.toDate().getFullYear()) : null
@@ -86,13 +92,13 @@ export default function EmployeeEdit({ user_id, role }) {
             "user_id",
             user_id
         )
-        axios.post(`${process.env.REACT_APP_BACKEND_URL}/api/system_admin/employee/updateProfileImage`, formData, {
+        axios.post(`${process.env.REACT_APP_BACKEND_URL}/api/${apiRole}/employee/updateProfileImage`, formData, {
             withCredentials:true
         }).then((res) => {
-            setUserInfo({...userInfo, profile_image:res.data.profile_image})
+            setUserInfo({...userInfo, profile_image: res.data.profile_image})
         })
     }
-  } 
+  }
 
   return (
     <div>
@@ -105,13 +111,13 @@ export default function EmployeeEdit({ user_id, role }) {
           overflow:'auto'
         }}
       >
-        <Avatar sx={{ width: 100, height: 100 }} src={userInfo.profile_image} />
+        <Avatar sx={{ width: 100, height: 100 }} src={userInfo?.profile_image} />
         <input type="file" onChange={onFileChange} />
         <TextField
           onChange={(e) =>
             setUserInfo({ ...userInfo, firstname: e.target.value })
           }
-          value={userInfo.firstname ?? ''}
+          value={userInfo?.firstname ?? ''}
           label="Firstname"
           variant="outlined"
         />
@@ -119,13 +125,13 @@ export default function EmployeeEdit({ user_id, role }) {
           onChange={(e) =>
             setUserInfo({ ...userInfo, lastname: e.target.value })
           }
-          value={userInfo.lastname ?? ''}
+          value={userInfo?.lastname ?? ''}
           label="Lastname"
           variant="outlined"
         />
         <TextField
           onChange={(e) => setUserInfo({ ...userInfo, email: e.target.value })}
-          value={userInfo.email ?? ''}
+          value={userInfo?.email ?? ''}
           label="Email"
           variant="outlined"
         />
@@ -133,7 +139,7 @@ export default function EmployeeEdit({ user_id, role }) {
           onChange={(e) =>
             setUserInfo({ ...userInfo, address: e.target.value })
           }
-          value={userInfo.address ?? ''}
+          value={userInfo?.address ?? ''}
           label="Address"
           variant="outlined"
         />
@@ -141,7 +147,7 @@ export default function EmployeeEdit({ user_id, role }) {
           onChange={(e) =>
             setUserInfo({ ...userInfo, department: e.target.value })
           }
-          value={userInfo.department ?? ''}
+          value={userInfo?.department ?? ''}
           label="Department"
           variant="outlined"
         />
@@ -149,7 +155,7 @@ export default function EmployeeEdit({ user_id, role }) {
           onChange={(e) =>
             setUserInfo({ ...userInfo, phone_number: e.target.value })
           }
-          value={userInfo.phone_number ?? ''}
+          value={userInfo?.phone_number ?? ''}
           label="Phone"
           variant="outlined"
         />
@@ -158,7 +164,7 @@ export default function EmployeeEdit({ user_id, role }) {
           onChange={(e) =>
             setUserInfo({ ...userInfo, postal_code: e.target.value })
           }
-          value={userInfo.postal_code ?? ''}
+          value={userInfo?.postal_code ?? ''}
           label="Postal code"
           variant="outlined"
         />
@@ -166,7 +172,7 @@ export default function EmployeeEdit({ user_id, role }) {
           onChange={(e) =>
             setUserInfo({ ...userInfo, remarks: e.target.value })
           }
-          value={userInfo.remarks ?? ''}
+          value={userInfo?.remarks ?? ''}
           label="Website"
           variant="outlined"
         />

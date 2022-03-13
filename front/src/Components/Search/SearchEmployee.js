@@ -62,6 +62,18 @@ export default function SearchEmployee({ me }) {
           setUsers(res.data);
         });
     }
+    else if (me.role === 'ADMIN') {
+      let url = `${process.env.REACT_APP_BACKEND_URL}/api/admins/employee/findUsers?`;
+      if (role) url += `role=${role}&`;
+      if (email) url += `email=${email}&`;
+      axios
+        .get(url, {
+          withCredentials: true,
+        })
+        .then((res) => {
+          setUsers(res.data);
+        });
+    }
   };
 
   useEffect(() => {
@@ -91,10 +103,10 @@ export default function SearchEmployee({ me }) {
 
   return (
     <div>
-      {me.role === "SYSTEM_ADMIN" && (
-        <div style={{display: 'flex', flexDirection: 'column', paddingBottom:'20px'}}>
+      {(me.role === "SYSTEM_ADMIN" || me.role === 'ADMIN') && (
+        <div style={{display: 'flex', flexDirection: 'column', paddingBottom:'20px', alignItems: "start"}}>
         <h1>Search Employee</h1>
-          <Autocomplete
+          {me.role === "SYSTEM_ADMIN" && <Autocomplete
             isOptionEqualToValue={(option, value) =>
               option.company_id === value.company_id
             }
@@ -104,7 +116,7 @@ export default function SearchEmployee({ me }) {
             renderInput={(params) => (
               <TextField key={params.key} {...params} label="Companies" />
             )}
-          />
+          />}
           <Autocomplete
             isOptionEqualToValue={(option, value) =>
               option.company_id === value.company_id
@@ -177,7 +189,7 @@ export default function SearchEmployee({ me }) {
             aria-describedby="modal-modal-description"
           >
             <Box sx={style}>
-              <EmployeeEdit user_id={selectedUser}/>
+              <EmployeeEdit role={me.role} user_id={selectedUser}/>
             </Box>
           </Modal>
         </div>

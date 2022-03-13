@@ -22,19 +22,21 @@ async function createEmployee(req, res, next) {
         invitation: "WAITING",
       },
     });
-    await employee_company.createOne({
-      data: {
-        company_id: userData.company_id,
-        user_id: userData.user_id,
-      },
-    });
+    if (userData.role !== 'SYSTEM_ADMIN') {
+      await employee_company.createOne({
+        data: {
+          company_id: userData.company_id,
+          user_id: userData.user_id,
+        },
+      });
+    }
   } catch (e) {
     return next(e);
   }
   try {
     const token = jwt.sign(userData, process.env.APP_SECRET);
     console.log(`${process.env.APP_HOSTNAME}/api/users/signUp/${token}`);
-    // await sendMail(userData.email, token, `${process.env.APP_HOSTNAME}/api/users/signUp/${token}`);
+    await sendMail(userData.email, 'click here', `${process.env.APP_HOSTNAME}/signUp?token=${token}`);
   } catch (e) {
     return res.status(500).send("Failed to send email");
   }
@@ -61,7 +63,7 @@ async function createSysAdmin(req, res, next) {
     console.log(
       `${process.env.APP_HOSTNAME}/api/users/signUp/system_admin/${token}`
     );
-    // await sendMail(userData.email, token, `${process.env.APP_HOSTNAME}/api/users/signUp/system_admin/${token}`);
+    await sendMail(userData.email, 'click here', `${process.env.APP_HOSTNAME}/signUp?token=${token}`);
   } catch (e) {
     return res.status(400).send("user created but failed to send email");
   }
@@ -295,8 +297,30 @@ async function cancelInvite(req, res, next) {
   }
 }
 
+async function getSystemAdmins(req, res, next) {
+  try {
+    const systemAdmins = await  users.findMany({
+      where: {
+        role:  'SYSTEM_ADMIN'
+      },
+      select: {
+        user_id: true,
+        email:true,
+        firstname: true,
+        lastname: true,
+        role:true,
+        invitation: true,
+      }
+    })
+    return res.status(200).send(systemAdmins);
+  } catch (e) {
+    return next(e)
+  }
+}
+
 module.exports = {
   cancelInvite,
+  getSystemAdmins,
   getInvitations,
   updateCompanyProfileImage,
   updateEmployeeProfileImage,

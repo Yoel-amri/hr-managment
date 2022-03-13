@@ -6,14 +6,14 @@ const {upload} = require('../users/uploadRoutes');
 const adminsControllers = require('./adminsControllers');
 
 router.post('/employee/inviteEmployee', authenticateAdmin, adminsControllers.inviteEmployee);
-router.post('/employee/updateEmployeeInfo', authenticateAdmin, adminsControllers.updateEmployeeInfo);
+router.post('/employee/updateProfile', authenticateAdmin, adminsControllers.updateEmployeeInfo);
 router.get('/employee/getEmployeeInfo', authenticateAdmin, adminsControllers.getEmployeeInfo);
-
-router.post('/employee/updateProfileImage', authenticateAdmin, upload.single('profile_image'), adminsControllers.updateProfileImage);
+router.get('/employee/findUsers', authenticateAdmin, adminsControllers.findEmployees);
+router.post('/employee/updateProfileImage', authenticateAdmin, upload.single('profile_img'), adminsControllers.updateProfileImage);
 router.get('/employee/invitations', authenticateAdmin, adminsControllers.getInvitations)
-router.post('employee/cancelInvite', authenticateAdmin, adminsControllers.cancelInvite)
+router.post('/employee/cancelInvite', authenticateAdmin, adminsControllers.cancelInvite)
 
-router.post('/company/updateCompamny', authenticateAdmin, adminsControllers.updateCompany)
-router.post('/company/updateCompanyImage', authenticateAdmin, upload.single('profile_image') ,adminsControllers.updateCompanyImage);
-
+router.post('/company/updateCompany', authenticateAdmin, adminsControllers.updateCompany)
+router.post('/company/updateCompanyImage', authenticateAdmin, upload.single('profile_img') ,adminsControllers.updateCompanyImage);
+router.get('/company/getOwnCompany', authenticateAdmin, adminsControllers.getOwnCompany)
 module.exports = router;

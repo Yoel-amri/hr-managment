@@ -51,7 +51,9 @@ export default function SearchCompany() {
   }
 
   return (
-    <div>
+    <div style={{display: "flex",
+      flexDirection: "column",
+      alignItems: "start"}}>
       <h1>Search Company</h1>
       <Autocomplete
         isOptionEqualToValue={(option, value) => option.company_id === value.company_id}
