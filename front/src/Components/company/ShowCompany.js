@@ -21,7 +21,6 @@ export default function ShowCompany({me}) {
     useEffect(() => {
         axios.get(`${process.env.REACT_APP_BACKEND_URL}/api/employee/company/getOwnCompany`, {withCredentials:true})
         .then((res) => {
-            console.log("opjpijpij")
             setCompany(res.data);
             setDateCreation(moment(res.data.date_creation))
         })

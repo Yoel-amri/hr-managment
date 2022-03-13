@@ -34,7 +34,6 @@ export default function InvitationsHistory({ me, updatedInvites }) {
         { withCredentials: true }
       )
       .then((res) => {
-        console.log(res.data);
         setHistory(res.data);
       });
   }, [updatedInvites, me.role]);

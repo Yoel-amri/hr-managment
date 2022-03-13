@@ -39,6 +39,3 @@ CREATE TABLE employee_company (
     user_id     VARCHAR (50) REFERENCES users UNIQUE,
     CONSTRAINT  PK_user_company PRIMARY KEY (company_id, user_id)
 );
-
-select (C.company_name, U.role, U.firstname +' '+ U.lastname as username, U.email, U.user_id) from users U , employee_company EC, company C where U.id = EC.user_id and EC.company_id = C.company_id and C.company_id='25235' and U.email = 'ewrgewrg' and U.role = 'dveverg' 
-

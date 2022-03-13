@@ -48,7 +48,6 @@ export default function EmployeeEdit({ user_id, role }) {
         { withCredentials: true }
       )
       .then((res) => {
-        console.log(res.data);
         setUserInfo(res.data[0]);
         setBirthday(moment(res?.data[0]?.birthday))
       });
@@ -59,7 +58,6 @@ export default function EmployeeEdit({ user_id, role }) {
   };
 
   const updateUser = () => {
-      // console.log(birthday);
     let apiRole = "system_admin";
     if (role === "ADMIN") apiRole = "admins";
     if (role === 'EMPLOYEE') apiRole = 'employee'

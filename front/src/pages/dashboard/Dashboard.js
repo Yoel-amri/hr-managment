@@ -37,7 +37,6 @@ function ResponsiveDrawer(props) {
   const [section, setSection] = React.useState('search')
 
   const me = props.user;
-  console.log(me);
   const handleDrawerToggle = () => {
     setMobileOpen(!mobileOpen);
   };

@@ -27,7 +27,6 @@ export default function SignIn({user, setUser}) {
       withCredentials: true
     })
     .then(res => {
-      console.log(res);
       localStorage.setItem('user_id', res.data.user_id);
       localStorage.setItem('role', res.data.role);
       localStorage.setItem('email', res.data.email);

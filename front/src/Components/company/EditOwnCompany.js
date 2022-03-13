@@ -32,7 +32,6 @@ export default function EditOwnCompany({me}) {
             ...company,
             date_creation: dateCreation.isValid() ? (dateCreation.toDate().getMonth()+1+'-'+dateCreation.toDate().getDate()+'-'+dateCreation.toDate().getFullYear()) : null,
         }
-        console.log(companyBody)
         axios.post(`${process.env.REACT_APP_BACKEND_URL}/api/admins/company/updateCompany`, companyBody,
         {
             withCredentials: true
