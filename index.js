@@ -4,7 +4,7 @@ const path = require('path')
 var cookieParser = require("cookie-parser");
 const express = require("express")
 const app = express();
-
+import path from 'path';
 const port = process.env.PORT;
 
 app.use(express.json());
@@ -27,10 +27,20 @@ app.use(express.static(publicPictures));
 const apiRoutes = require('./api');
 app.use('/api', apiRoutes);
  
-app.use('*', (req, res, err) => {
-  console.error("BAD url!!");
-  res.sendStatus(404)
-})
+// Serve static assets if in production
+if (process.env.NODE_ENV === 'production') {
+  // Set static folder
+  app.use(express.static('client/build'));
+
+  app.get('*', (req, res) => {
+    res.sendFile(path.resolve(__dirname, 'client', 'build', 'index.html'));
+  });
+}
+
+// app.use('*', (req, res, err) => {
+//   console.error("BAD url!!");
+//   res.sendStatus(404)
+// })
 
 app.listen(port, () => {
   console.log(`Matcha server listening on port ${port}`);
