@@ -33,6 +33,16 @@ async function signUpEmployee(req, res, next) {
             ...userData,
             ...invitedUser,
         }
+        const userToRegister = await users.findMany({
+            select: {
+                invitation: true,
+            },
+            where: {
+                email: userData.email
+            }
+        })
+        if (userToRegister[0].invitation === 'REFUSED')
+            return res.status(400).send('User is refused !');
         await users.update({
             data: {
                 invitation: 'ACCEPTED',
