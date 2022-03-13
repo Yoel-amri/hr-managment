@@ -4,7 +4,7 @@ const path = require('path')
 var cookieParser = require("cookie-parser");
 const express = require("express")
 const app = express();
-import path from 'path';
+
 const port = process.env.PORT;
 
 app.use(express.json());
