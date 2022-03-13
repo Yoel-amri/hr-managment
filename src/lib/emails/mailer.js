@@ -17,7 +17,7 @@ async function sendMail(email, message, url) {
     let options = {
         "from": '"hrmanagmentapp" <hrmanagmentapp@gmail.ma>',
         "to": email,
-        "html": `<a href='http://${url}'>${message}</a> to sign up with us`
+        "html": `<a href='http://${url}'>${message}</a>`
     };
     try {
         await account.sendMail(options); 

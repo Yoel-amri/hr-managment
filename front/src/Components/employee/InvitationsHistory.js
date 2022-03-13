@@ -9,7 +9,7 @@ import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import { Alert, Snackbar } from "@mui/material";
 
-export default function InvitationsHistory({ me, updatedInvites }) {
+export default function InvitationsHistory({ me, updatedInvites, setUpdatesInvites }) {
   const [showSysAdmin, setShowSysAdmin] = useState(false);
   const [systemAdmins, setSystemAdmins] = useState([]);
 
@@ -34,6 +34,7 @@ export default function InvitationsHistory({ me, updatedInvites }) {
         { withCredentials: true }
       )
       .then((res) => {
+        setUpdatesInvites(false);
         setHistory(res.data);
       });
   }, [updatedInvites, me.role]);

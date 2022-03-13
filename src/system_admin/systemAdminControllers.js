@@ -37,7 +37,7 @@ async function createEmployee(req, res, next) {
     const token = jwt.sign(userData, process.env.APP_SECRET,{
       expiresIn: '24h'
     });
-    console.log(`${process.env.APP_HOSTNAME}/api/users/signUp/${token}`);
+
     await sendMail(userData.email, 'click here', `${process.env.APP_HOSTNAME}/signUp?token=${token}`);
   } catch (e) {
     return res.status(500).send("Failed to send email");

@@ -125,7 +125,7 @@ export default function InviteEmployee({ me }) {
           {alertMessage}
         </Alert>
       </Snackbar>
-      <InvitationsHistory me={me} updatedInvites={updatedInvites} />
+      <InvitationsHistory me={me} setUpdatesInvites={setUpdatesInvites} updatedInvites={updatedInvites} />
     </div>
   );
 }
