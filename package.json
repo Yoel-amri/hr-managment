@@ -1,4 +1,8 @@
 {
+  "engines" : { 
+    "npm" : "8.3.0",
+    "node" : "v17.3.0"
+  },
   "name": "Employee_managment_system",
   "version": "1.0.0",
   "description": "Employee_managment_system",
