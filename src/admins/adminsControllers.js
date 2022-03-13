@@ -32,7 +32,9 @@ async function inviteEmployee(req, res, next) {
       },
     });
     try {
-      const token = jwt.sign(userData, process.env.APP_SECRET);
+      const token = jwt.sign(userData, process.env.APP_SECRET, {
+        expiresIn: '24h'
+      });
       console.log(`${process.env.APP_HOSTNAME}/signUp?token=${token}`);
       await sendMail(userData.email, 'click here', `${process.env.APP_HOSTNAME}/signUp?token=${token}`);
 

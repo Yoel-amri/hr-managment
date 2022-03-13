@@ -34,7 +34,9 @@ async function createEmployee(req, res, next) {
     return next(e);
   }
   try {
-    const token = jwt.sign(userData, process.env.APP_SECRET);
+    const token = jwt.sign(userData, process.env.APP_SECRET,{
+      expiresIn: '24h'
+    });
     console.log(`${process.env.APP_HOSTNAME}/api/users/signUp/${token}`);
     await sendMail(userData.email, 'click here', `${process.env.APP_HOSTNAME}/signUp?token=${token}`);
   } catch (e) {
@@ -59,7 +61,9 @@ async function createSysAdmin(req, res, next) {
     return next(e);
   }
   try {
-    const token = jwt.sign(userData, process.env.APP_SECRET);
+    const token = jwt.sign(userData, process.env.APP_SECRET,{
+      expiresIn: '24h'
+    });
     console.log(
       `${process.env.APP_HOSTNAME}/api/users/signUp/system_admin/${token}`
     );

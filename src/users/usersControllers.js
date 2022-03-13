@@ -8,8 +8,6 @@ const {
     hashPassword,
 } = require("../lib/hashPassword");
 const {users} = require("../services/schema/types");
-const { v4: uuidv4 } = require('uuid');
-const { sendMail } = require('../lib/emails/mailer')
 const jwt = require('jsonwebtoken');
 const bcrypt = require('bcrypt');
 var fs = require('fs');
@@ -119,7 +117,7 @@ async function login(req, res, next) {
     })
     if (!loggedUser.length)
         return res.status(401).send("Email or Password is incorrect !")
-    console.log(req.body.password, loggedUser[0].password);
+    // console.log(req.body.password, loggedUser[0].password);
     const match = await bcrypt.compare(req.body.password, loggedUser[0].password);
     if (!match)
         return res.status(401).send("Email or Password is incorrect !");
@@ -133,7 +131,7 @@ async function login(req, res, next) {
         expiresIn: '24h'
     })
     return res.cookie('accessToken', loggedUserToken, {
-        maxAge: 3000000000,
+        maxAge: 24 * 60 * 60 * 100,
         httpOnly: true,
         secure: false
     }).send(httpOnlyCookie);
@@ -142,7 +140,7 @@ async function login(req, res, next) {
 
 async function logout(req, res, next) {
     res.clearCookie('accessToken');
-    res.status(200).send('Cookie cleared')
+    return res.status(200).send('Cookie cleared')
 }
 
 module.exports = {
