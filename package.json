@@ -1,7 +1,7 @@
 {
-  "engines" : { 
-    "npm" : "8.3.0",
-    "node" : "v17.3.0"
+  "engines": {
+    "npm": "8.3.0",
+    "node": "v17.3.0"
   },
   "name": "Employee_managment_system",
   "version": "1.0.0",
@@ -23,6 +23,7 @@
   "license": "ISC",
   "dependencies": {
     "bcrypt": "^5.0.1",
+    "concurrently": "^7.0.0",
     "cookie-parser": "^1.4.5",
     "cors": "^2.8.5",
     "dayjs": "^1.10.7",

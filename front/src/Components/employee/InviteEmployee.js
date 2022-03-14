@@ -14,7 +14,9 @@ export default function InviteEmployee({ me }) {
   const [alertMessage, setAlertMessage] = useState('Employee invited !');
   const [accountType, setAccountType] = useState("");
   const [companies, setCompanies] = useState([]);
-  const [selectedCompany, setSelectedCompany] = useState("");
+  const [selectedCompany, setSelectedCompany] = useState({
+    company_id: ''
+  });
   const [email, setEmail] = useState("");
   const [updatedInvites, setUpdatesInvites] = useState(false);
 

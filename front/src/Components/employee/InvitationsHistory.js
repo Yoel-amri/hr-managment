@@ -37,7 +37,7 @@ export default function InvitationsHistory({ me, updatedInvites, setUpdatesInvit
         setUpdatesInvites(false);
         setHistory(res.data);
       });
-  }, [updatedInvites, me.role]);
+  }, [updatedInvites]);
 
   const cancelInvite = (user_id) => {
     let roleUrl = "admins";
@@ -90,9 +90,10 @@ export default function InvitationsHistory({ me, updatedInvites, setUpdatesInvit
         )
         .then((res) => {
           setSystemAdmins(res.data);
+          setUpdatesInvites(false);
         });
     }
-  }, [showSysAdmin]);
+  }, [showSysAdmin, updatedInvites]);
 
   return (
     <div>

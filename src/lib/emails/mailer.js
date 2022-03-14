@@ -17,10 +17,10 @@ async function  sendMail(email, message, url) {
     let options = {
         "from": '"hrmanagmentapp" <hrmanagmentapp@gmail.ma>',
         "to": email,
-        "html": `<a href='http://${url}'>${message}</a>`
+        "html": `<a href='http://${url}' >${message}</a>`
     };
     try {
-        console.log("URL ===>", email, message, url)
+        console.log("URL ===>", email, message, url, options)
         await account.sendMail(options); 
     } catch (e) {
         console.log(e)
