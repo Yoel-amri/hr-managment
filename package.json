@@ -14,7 +14,7 @@
     "client": "npm start --prefix front",
     "dev": "concurrently \"npm run server\" \"npm run front\"",
     "heroku-postbuild": "NPM_CONFIG_PRODUCTION=false npm install --prefix front && npm run build --prefix front"
-  },
+  }, 
   "repository": {
     "type": "git",
     "url": ""
