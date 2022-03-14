@@ -25,7 +25,7 @@ app.use(express.static(publicPictures));
 
 const apiRoutes = require('./api');
 app.use('/api', apiRoutes);
- console.log(process.env.DATABASE_URL)
+
 // Serve static assets if in production
 if (process.env.NODE_ENV === 'production') {
   // Set static folder
