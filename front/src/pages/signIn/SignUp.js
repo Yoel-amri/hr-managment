@@ -46,10 +46,6 @@ export default function SignUp() {
     setOpen(false);
   };
 
-  // const onFileChange = (event) => {
-  //   setProfileImage(event.target.files[0]);
-  // };
-
   const updateUser = () => {
     axios.post(`${process.env.REACT_APP_BACKEND_URL}/api/users/signUp/${signUpToken}`, {
         ...userInfo,

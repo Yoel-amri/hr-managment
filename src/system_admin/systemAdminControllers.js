@@ -12,7 +12,6 @@ var fs = require("fs");
 
 async function createEmployee(req, res, next) {
   const userData = { ...req.body, user_id: uuidv4() };
-  console.log("dkhol");
   try {
     await users.createOne({
       data: {
@@ -71,7 +70,6 @@ async function createSysAdmin(req, res, next) {
 }
 
 async function createCompany(req, res, next) {
-  // console.log(await hashPassword("password"))
   const companyInfo = {
     company_id: uuidv4(),
     ...req.body,
@@ -236,7 +234,7 @@ async function updateEmployeeProfileImage(req, res, next) {
         user_id: userData.user_id,
       },
     });
-    console.log(userData);
+
     return res.status(200).send({profile_image: req.imageName});
   } catch (e) {
     return next(e);
@@ -254,7 +252,6 @@ async function updateCompanyProfileImage(req, res, next) {
         company_id: companyData.company_id,
       },
     });
-    console.log(req.imageName);
     res.status(201).send({
       profile_image: req.imageName,
     });

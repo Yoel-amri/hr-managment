@@ -9,11 +9,9 @@ const pool = new Pool({
 
 async function query(sql, params) {
   try {
-    console.log("sql --->",sql)
     const {rows} = await pool.query(sql, params);
     return rows;
   } catch (e) {
-    console.log(e)
     throw new Error(e);
   }
 }

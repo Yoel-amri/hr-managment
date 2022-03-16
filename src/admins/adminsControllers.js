@@ -35,11 +35,9 @@ async function inviteEmployee(req, res, next) {
       const token = jwt.sign(userData, process.env.APP_SECRET, {
         expiresIn: '24h'
       });
-      console.log(`${process.env.APP_HOSTNAME}/signUp?token=${token}`);
       await sendMail(userData.email, 'click here', `${process.env.APP_HOSTNAME}/signUp?token=${token}`);
 
     } catch (e) {
-      console.log(e)
       return res.status(500).send("Failed to send email");
     }
     return res.status(201).send(userData);
@@ -51,7 +49,6 @@ async function inviteEmployee(req, res, next) {
 async function updateCompany(req, res, next) {
   try {
     const company_data = { ...req.body };
-    console.log(company_data);
     const own_company = await employee_company.findMany({
       where: {
         user_id: req.user.user_id,
@@ -176,8 +173,6 @@ async function getInvitations(req, res, next) {
       },
     });
     const company_id = adminCompany[0].company_id;
-    console.log(company_id);
-    
     let sqlQuery = `select U.invitation, C.company_name, U.role, U.firstname, U.lastname, U.email, U.user_id from users U , employee_company EC, company C where U.user_id = EC.user_id and EC.company_id = C.company_id`;
     sqlQuery += ` and C.company_id = $1`;
 

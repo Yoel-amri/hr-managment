@@ -152,7 +152,6 @@ function analyseQuery(query) {
             queryAnalysed.orderBy  =  value;
         }
     }
-    // console.log(queryAnalysed);
     return (queryAnalysed)
 }
 
@@ -180,14 +179,12 @@ class databaseModel {
             return rows;
         }
         catch (e) {
-            console.log(e.fields);
             throw newSqlError(e.message, e.name);
         }
     }
 
     async update(query) {
         const queryAnalysed = analyseQuery(query);
-        // console.log(queryAnalysed);
         const updateSql = 'UPDATE ' + this.tableName + ' SET ' + queryAnalysed.dataKeysWithComma + ' WHERE ' + queryAnalysed.whereClauseKeys;
         try {
             const rows = await db.query(updateSql, [...queryAnalysed.dataValues, ...queryAnalysed.whereClauseValues]);
@@ -203,9 +200,7 @@ class databaseModel {
         if (query.data) {
             const dataKeys = Object.keys(query.data);
             let valuesSql = questionMarks(dataKeys.length);
-            // console.log("Adding values to database ===>\n",valuesSql);
             const insertSql = 'INSERT INTO ' + this.tableName +'('+queryAnalysed.dataKeys+')'+ ' values (' + valuesSql + ')';
-            // console.log("Generate sql for insert is ===>", insertSql);
             try {
                 const rows = await db.query(insertSql, queryAnalysed.dataValues);
                 return(rows);
@@ -233,54 +228,3 @@ class databaseModel {
 module.exports = {
     databaseModel,
 }
-
-    // const where = {
-    //     OR: [
-    //         {
-    //             id: 1,
-    //             id2: 2
-    //         },
-    //         {
-    //             id: 2
-    //         },
-    //         {
-    //             OR : [
-    //                 {
-    //                     AND : [ 
-    //                         {
-    //                             test: 23,
-    //                         },
-    //                         {
-    //                             testa: 23,
-    //                         }
-    //                     ]
-    //                 },
-    //                 {
-    //                     OR: [
-    //                         {
-    //                             test3: 32
-    //                         },
-    //                         {
-    //                             test3: 32
-    //                         }
-    //                     ]
-    //                 }
-    //             ]
-    //         },
-    //     ]
-    // };
-
-    // const newuser = new user();
-    // try {
-    //     newuser.update({
-    //         where: where,
-    //         data: {
-    //             firstname: 'youness',
-    //             lastname: 'nadi canadi'
-    //         }
-    //     })
-    // }
-    // catch (e) {
-    //     console.error("test")
-    // }
-    

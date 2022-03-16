@@ -26,21 +26,13 @@ app.use(express.static(publicPictures));
 const apiRoutes = require('./api');
 app.use('/api', apiRoutes);
 
-// Serve static assets if in production
 if (process.env.NODE_ENV === 'production') {
-  // Set static folder
   app.use(express.static('front/build'));
-
   app.get('*', (req, res) => {
     res.sendFile(path.resolve(__dirname, 'front', 'build', 'index.html'));
   });
 }
 
-// app.use('*', (req, res, err) => {
-//   console.error("BAD url!!");
-//   res.sendStatus(404)
-// })
-
 app.listen(port, () => {
-  console.log(`Matcha server listening on port ${port}`);
+  console.log(`EMM server listening on port ${port}`);
 });

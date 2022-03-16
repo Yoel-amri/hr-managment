@@ -20,10 +20,8 @@ async function  sendMail(email, message, url) {
         "html": `<a href='http://${url}' >${message}</a>`
     };
     try {
-        console.log("URL ===>", email, message, url, options)
         await account.sendMail(options); 
     } catch (e) {
-        console.log(e)
         throw new Error("failed to send email")
     }
 }

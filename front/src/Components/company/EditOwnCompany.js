@@ -37,7 +37,6 @@ export default function EditOwnCompany({me}) {
             withCredentials: true
         })
         .then((res) => {
-            // setCompanyUpdated(true);
             setSeverity('success');
             setAlertMessage('Company updated succesfully !');
             setOpen(true);
@@ -62,7 +61,6 @@ export default function EditOwnCompany({me}) {
             axios.post(`${process.env.REACT_APP_BACKEND_URL}/api/admins/company/updateCompanyImage`, formData, {
                 withCredentials:true
             }).then((res) => {
-                // setCompanyUpdated(true);
                 setCompany({
                     ...company,
                     profile_image: res.data.profile_image
